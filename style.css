@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Gowun+Dodum&display=swap');
+
+/* 색상과 글꼴을 변수로 모아 두면 전체 디자인을 한곳에서 조정할 수 있습니다. */
+:root {
+  color-scheme: light;
+  --ink: #202a27;
+  --muted: #78817c;
+  --line: #e5e8e2;
+  --paper: #fffefa;
+  --canvas: #f5f6f2;
+  --green: #315f50;
+  --green-deep: #24493d;
+  --coral: #df6e4d;
+  --font-body: "DM Sans", "Gowun Dodum", sans-serif;
+}
+
+/* 너비 계산에 테두리와 안쪽 여백을 포함해 레이아웃 계산을 단순하게 합니다. */
+* { box-sizing: border-box; }
+
+/* 페이지 배경, 기본 글꼴, 본문 글자색 */
+body {
+  margin: 0;
+  background-color: var(--canvas);
+  background-image: radial-gradient(#dfe4db 0.7px, transparent 0.7px);
+  background-size: 17px 17px;
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 폼 컨트롤도 페이지 글꼴을 이어받고 버튼에는 클릭 표시를 줍니다. */
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+
+/* 상단 브랜드 바와 중앙에 정렬되는 페이지 본문 */
+.topbar {
+  height: 68px;
+  padding: 0 max(28px, calc((100% - 1160px) / 2));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 254, 250, 0.92);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-weight: 700; }
+.brand-mark { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; background: var(--green); color: white; font-size: 17px; }
+.topbar-note { color: var(--muted); font-size: 13px; }
+.dashboard { width: min(1160px, calc(100% - 56px)); margin: 46px auto 0; }
+.intro { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 28px; }
+.eyebrow { margin: 0 0 8px; color: var(--green); font-size: 10px; font-weight: 700; letter-spacing: 1.2px; }
+h1, h2, h3, p { margin-top: 0; }
+h1 { margin-bottom: 0; font-family: "Gowun Dodum", sans-serif; font-size: 30px; line-height: 1.35; font-weight: 400; }
+.mobile-break { display: none; }
+.today-label { margin: 0 0 4px; color: var(--muted); font-size: 13px; }
+/* 지출 요약: 첫 번째 패널은 강조하고 나머지는 밝은 배경을 사용합니다. */
+.summary-grid { display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 12px; margin-bottom: 34px; }
+.summary-panel { min-height: 133px; padding: 20px 22px; border: 1px solid var(--line); border-radius: 7px; background: var(--paper); }
+.summary-primary { background: var(--green); border-color: var(--green); color: white; }
+.summary-label { margin: 0 0 12px; color: var(--muted); font-size: 12px; }
+.summary-primary .summary-label, .summary-primary .summary-foot { color: #d1e1d8; }
+.summary-value { margin: 0 0 7px; font-size: 28px; line-height: 1.1; font-weight: 700; font-variant-numeric: tabular-nums; }
+.summary-foot { margin: 0; color: var(--muted); font-size: 11px; }
+/* 넓은 화면의 본문은 구독 목록과 오른쪽 보조 패널 두 열로 구성합니다. */
+.content-grid { display: grid; grid-template-columns: minmax(0, 1.72fr) minmax(290px, 0.88fr); align-items: start; gap: 28px; }
+.section-heading { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px; }
+.section-heading h2 { display: flex; align-items: center; gap: 9px; margin: 0; font-family: "Gowun Dodum", sans-serif; font-size: 20px; font-weight: 400; }
+.count-badge { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 50px; background: #e8eee9; color: var(--green); font: 600 11px "DM Sans", sans-serif; }
+.section-caption { padding-bottom: 3px; color: var(--muted); font-size: 11px; }
+/* 구독 카드는 아이콘/정보/금액/D-day/작업 버튼을 한 줄에 배치합니다. */
+.subscription-list { overflow: hidden; border: 1px solid var(--line); border-radius: 7px; background: var(--paper); }
+.subscription-item { min-height: 83px; display: grid; grid-template-columns: 40px minmax(100px, 1fr) auto auto 56px; align-items: center; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--line); }
+.subscription-item:last-child { border-bottom: 0; }
+.service-mark { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 12px 12px 12px 4px; background: #f1e7dc; color: #9b6148; font-weight: 700; }
+.subscription-item:nth-child(3n + 2) .service-mark { background: #e1eee7; color: var(--green); }
+.subscription-item:nth-child(3n) .service-mark { background: #f3ead1; color: #92702e; }
+.service-title-row { display: flex; align-items: center; gap: 7px; min-width: 0; }
+.service-title-row h3 { overflow: hidden; margin: 0; font-size: 14px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.category-tag { flex: 0 0 auto; padding: 3px 6px; border-radius: 3px; background: #f1f2ed; color: #66716b; font-size: 10px; }
+.service-meta { overflow: hidden; margin: 6px 0 0; color: var(--muted); font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.service-cost { display: flex; flex-direction: column; gap: 4px; text-align: right; white-space: nowrap; }
+.service-cost strong { font-size: 13px; font-variant-numeric: tabular-nums; }
+.service-cost span { color: var(--muted); font-size: 10px; }
+.service-due { min-width: 55px; padding: 5px 7px; border-radius: 4px; background: #f1f2ed; color: #66716b; text-align: center; font-size: 10px; font-weight: 600; }
+.service-due.due-soon { background: #fbe9e2; color: #b45338; }
+.item-actions { display: flex; justify-content: flex-end; gap: 3px; }
+.icon-button { width: 26px; height: 28px; padding: 0; border: 0; background: transparent; color: #68736d; font-size: 17px; }
+.icon-button:hover { color: var(--green); }
+.delete-button:hover { color: #c34f38; }
+.empty-state { min-height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--muted); text-align: center; }
+.empty-icon { width: 35px; height: 35px; display: grid; place-items: center; margin-bottom: 12px; border-radius: 50%; background: #e8eee9; color: var(--green); font-size: 20px; }
+.empty-state p { margin: 0 0 5px; color: var(--ink); font-size: 13px; }
+.empty-state span:last-child { font-size: 11px; }
+/* 오른쪽 패널에는 카테고리 비중과 구독 입력 폼을 세로로 쌓습니다. */
+.sidebar { display: flex; flex-direction: column; gap: 22px; }
+.category-section, .form-section { padding: 20px; border: 1px solid var(--line); border-radius: 7px; background: var(--paper); }
+.compact-heading { margin-bottom: 19px; }
+.compact-heading h2 { font-size: 18px; }
+.category-list { display: flex; flex-direction: column; gap: 16px; }
+.category-row-top { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 7px; color: #68736d; font-size: 10px; }
+.category-row-top b { margin-left: 5px; color: var(--ink); font-weight: 600; }
+.category-name { display: flex; align-items: center; gap: 7px; color: var(--ink); }
+.category-name i { width: 8px; height: 8px; border-radius: 2px; background: var(--category-color); }
+.category-track { height: 5px; overflow: hidden; border-radius: 10px; background: #eef0eb; }
+.category-track span { display: block; height: 100%; border-radius: inherit; background: var(--category-color); }
+.category-empty { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+/* 입력 컨트롤의 높이와 간격을 통일하고, 키보드 포커스를 테두리로 보여줍니다. */
+.form-section { background: #fffefa; }
+.field { display: flex; min-width: 0; flex-direction: column; gap: 6px; margin-bottom: 13px; color: #59645e; font-size: 11px; font-weight: 600; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.field input, .field select { width: 100%; min-width: 0; height: 39px; padding: 0 10px; border: 1px solid #dfe3dc; border-radius: 4px; outline: none; background: #fff; color: var(--ink); font-size: 12px; font-weight: 400; }
+.field input:focus, .field select:focus { border-color: var(--green); box-shadow: 0 0 0 2px rgba(49, 95, 80, 0.12); }
+.field input::placeholder { color: #aab1ac; }
+.form-actions { display: flex; align-items: center; gap: 11px; margin-top: 4px; }
+.primary-button { min-height: 40px; padding: 0 15px; border: 0; border-radius: 4px; background: var(--green); color: white; font-size: 12px; font-weight: 600; }
+.primary-button:hover { background: var(--green-deep); }
+.primary-button span { margin-right: 5px; font-size: 16px; vertical-align: -1px; }
+.text-button { padding: 8px 0; border: 0; background: transparent; color: var(--muted); font-size: 11px; }
+.form-message { min-height: 16px; margin: 9px 0 0; color: #b45338; font-size: 11px; }
+.footer-note { margin: 28px 0 24px; color: var(--muted); text-align: center; font-size: 10px; }
+
+/* 태블릿 폭에서는 사이드바를 목록 아래로 이동해 콘텐츠 폭을 확보합니다. */
+@media (max-width: 900px) {
+  .dashboard { width: min(100% - 40px, 700px); margin-top: 34px; }
+  .content-grid { grid-template-columns: 1fr; gap: 22px; }
+  .sidebar { display: grid; grid-template-columns: 1fr 1fr; align-items: start; }
+  .subscription-item { grid-template-columns: 40px minmax(100px, 1fr) auto auto 56px; }
+}
+
+/* 모바일에서는 여백과 글자 크기를 줄이고 구독 카드 정보를 두 줄로 재배치합니다. */
+@media (max-width: 560px) {
+  .topbar { height: 58px; padding: 0 18px; }
+  .dashboard { width: calc(100% - 32px); margin-top: 28px; }
+  .intro { align-items: flex-start; flex-direction: column; gap: 13px; margin-bottom: 20px; }
+  h1 { font-size: 25px; }
+  .mobile-break { display: initial; }
+  .today-label { font-size: 11px; }
+  .summary-grid { grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 27px; }
+  .summary-panel { min-height: 108px; padding: 15px 13px; }
+  .summary-primary { grid-column: 1 / -1; min-height: 118px; }
+  .summary-label { margin-bottom: 10px; font-size: 11px; }
+  .summary-value { font-size: 23px; }
+  .summary-primary .summary-value { font-size: 29px; }
+  .summary-foot { font-size: 10px; }
+  .section-heading h2 { font-size: 18px; }
+  .subscription-item { grid-template-columns: 34px minmax(0, 1fr) auto; gap: 9px; min-height: 77px; padding: 12px 10px; }
+  .service-mark { width: 33px; height: 33px; border-radius: 10px 10px 10px 3px; }
+  .service-title-row { flex-wrap: wrap; gap: 4px; }
+  .service-title-row h3 { max-width: 100%; font-size: 13px; }
+  .service-meta { font-size: 9px; }
+  .service-cost { grid-column: 2; grid-row: 2; align-items: flex-start; flex-direction: row; gap: 5px; text-align: left; }
+  .service-cost strong { font-size: 11px; }
+  .service-cost span { align-self: center; font-size: 9px; }
+  .service-due { grid-column: 3; grid-row: 1; min-width: 52px; padding: 5px 4px; font-size: 9px; }
+  .item-actions { grid-column: 3; grid-row: 2; }
+  .icon-button { width: 23px; height: 23px; font-size: 16px; }
+  .sidebar { grid-template-columns: 1fr; gap: 14px; }
+  .category-section, .form-section { padding: 17px; }
+  .footer-note { margin-top: 22px; }
+}
